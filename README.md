@@ -1,101 +1,40 @@
-# Github-Oauth MCP server
+# Development
 
-A MCP server project
+## Set up your environment
+First, let’s install uv and set up our Python project and environment:
 
-## Components
+```bash
+MacOS/Linux : curl -LsSf https://astral.sh/uv/install.sh | sh
+Windows : powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+```
+Make sure to restart your terminal afterwards to ensure that the uv command gets picked up.
 
-### Resources
+Now, let’s create and set up our project:
+### Running to local claude desktop app
 
-The server implements a simple note storage system with:
-- Custom note:// URI scheme for accessing individual notes
-- Each note resource has a name, description and text/plain mimetype
+1. Make sure you need to update claude_desktop_config.json to register tool
 
-### Prompts
-
-The server provides a single prompt:
-- summarize-notes: Creates summaries of all stored notes
-  - Optional "style" argument to control detail level (brief/detailed)
-  - Generates prompt combining all current notes with style preference
-
-### Tools
-
-The server implements one tool:
-- add-note: Adds a new note to the server
-  - Takes "name" and "content" as required string arguments
-  - Updates server state and notifies clients of resource changes
-
-## Configuration
-
-[TODO: Add configuration details specific to your implementation]
-
-## Quickstart
-
-### Install
-
-#### Claude Desktop
-
-On MacOS: `~/Library/Application\ Support/Claude/claude_desktop_config.json`
-On Windows: `%APPDATA%/Claude/claude_desktop_config.json`
-
-<details>
-  <summary>Development/Unpublished Servers Configuration</summary>
-  ```
+## you can find claude_desktop_config.json :
+```bash
+For Windows : code $env:AppData\Claude\claude_desktop_config.json
+For Mac/Linux :code ~/Library/Application\ Support/Claude/claude_desktop_config.json
+```
+```bash
+{
   "mcpServers": {
     "Github-Oauth": {
-      "command": "uv",
+      "command": "C:\\Users\\Hp\\.local\\bin\\uv",
       "args": [
         "--directory",
-        "C:\Users\Hp\Github-Oauth",
+        "C:\\Users\\Hp\\Github-Oauth\\src\\github_oauth",
         "run",
-        "Github-Oauth"
+        "server.py"
       ]
     }
   }
-  ```
-</details>
-
-<details>
-  <summary>Published Servers Configuration</summary>
-  ```
-  "mcpServers": {
-    "Github-Oauth": {
-      "command": "uvx",
-      "args": [
-        "Github-Oauth"
-      ]
-    }
-  }
-  ```
-</details>
-
-## Development
-
-### Building and Publishing
-
-To prepare the package for distribution:
-
-1. Sync dependencies and update lockfile:
-```bash
-uv sync
+}
 ```
-
-2. Build package distributions:
-```bash
-uv build
-```
-
-This will create source and wheel distributions in the `dist/` directory.
-
-3. Publish to PyPI:
-```bash
-uv publish
-```
-
-Note: You'll need to set PyPI credentials via environment variables or command flags:
-- Token: `--token` or `UV_PUBLISH_TOKEN`
-- Or username/password: `--username`/`UV_PUBLISH_USERNAME` and `--password`/`UV_PUBLISH_PASSWORD`
-
-### Debugging
+## Debugging 
 
 Since MCP servers run over stdio, debugging can be challenging. For the best debugging
 experience, we strongly recommend using the [MCP Inspector](https://github.com/modelcontextprotocol/inspector).
