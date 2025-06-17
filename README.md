@@ -1,3 +1,5 @@
+[![MseeP.ai Security Assessment Badge](https://mseep.net/pr/nikhil-patil-ri-mcp-github-oauth-badge.png)](https://mseep.ai/app/nikhil-patil-ri-mcp-github-oauth)
+
 # Development
 
 ## Set up your environment
